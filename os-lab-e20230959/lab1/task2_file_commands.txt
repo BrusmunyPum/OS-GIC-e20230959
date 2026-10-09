@@ -1,0 +1,16 @@
+/home/gic-pum-brusmuny/oslab-work/lab1/task2_files
+silver.txt
+stone_copy.txt
+stone_renamed.txt
+silver.txt
+stone.txt
+This is file silver
+This is file stone
+silver.txt
+silver_copy.txt
+stone.txt
+silver.txt
+silver_copy.txt
+stone_renamed.txt
+silver.txt
+stone_renamed.txt
