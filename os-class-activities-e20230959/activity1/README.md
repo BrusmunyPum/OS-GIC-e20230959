@@ -120,7 +120,29 @@ Both outputs match. I compared them with the results sorted and written outside 
 
 ## Optional Bonus: Windows API (`file_creator_win.c`)
 
-Not attempted.
+Source: [file_creator_win.c](task1/file_creator_win.c)
+
+**Implementation notes.** This is Task 1A written with the Windows API only. `CreateFileA()` with `GENERIC_WRITE` and `CREATE_ALWAYS` creates `output.txt` (or overwrites it, like `O_CREAT | O_TRUNC`) and returns a `HANDLE`, which I check against `INVALID_HANDLE_VALUE`. `WriteFile()` writes the text to the handle and `CloseHandle()` closes it. The confirmation goes to the console with `WriteFile()` on `GetStdHandle(STD_OUTPUT_HANDLE)`, the Windows equivalent of `write(1, ...)`. The text and confirmation are identical to Task 1A. Compiled with MinGW `gcc` (MSYS2) and run on my Windows PC.
+
+| WinAPI | POSIX equivalent |
+|---|---|
+| `CreateFileA()` | `open()` |
+| `WriteFile()` | `write()` |
+| `CloseHandle()` | `close()` |
+| `GetStdHandle()` | `write(1, ...)` target |
+
+![task1_win](screenshots/task1_win.png)
+
+**Bonus Q1. Why does Windows use `HANDLE` instead of integer file descriptors?**
+A `HANDLE` is an opaque reference to a kernel object. Windows uses the same type for files, processes, threads, events, mutexes, pipes and the console, so one mechanism (`CloseHandle`, `WaitForSingleObject`, security descriptors) works for all of them. A POSIX file descriptor is just a small integer (0, 1, 2, 3, ...) that indexes the process's file table and is mainly for files and file-like things. A handle carries more design: the kernel can attach access rights and security to it, and the program must treat it as a black box and never do arithmetic on it.
+
+**Bonus Q2. What is the Windows equivalent of POSIX `fork()`? Why is it different?**
+The closest equivalent is `CreateProcess()`. `fork()` clones the calling process (same memory and open files) and then the child usually calls `exec()` to load a new program. `CreateProcess()` does both in one step: it creates a new process directly from an executable file, with its own fresh address space, and the caller passes the program name, arguments, and settings. Windows has no `fork()` because its process model was designed around creating a new process from a program image, not copying an existing one. That is also cheaper than copying a whole process only to replace it.
+
+**Bonus Q3. Can you use POSIX calls on Windows?**
+Not natively: Windows does not provide `fork()`, `open()` or file descriptors as its own system interface (some C runtime functions such as `_open` exist, but they are a thin layer over the Windows API). You can get POSIX behavior through a compatibility layer:
+- **WSL (Windows Subsystem for Linux):** runs a real Linux environment, so Linux programs and POSIX calls work as they do on a Linux machine.
+- **Cygwin:** provides a POSIX API library (`cygwin1.dll`) so that POSIX programs can be compiled for Windows and run there.
 
 ---
 
