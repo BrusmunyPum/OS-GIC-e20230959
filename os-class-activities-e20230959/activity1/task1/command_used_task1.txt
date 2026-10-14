@@ -1,0 +1,23 @@
+Commands used for Task 1 (File Creator and Reader)
+Server: i4gic-os, user gic-pum-brusmuny
+
+# Part A - file creator
+gcc file_creator_lib.c -o file_creator_lib
+./file_creator_lib
+cat output.txt
+cp output.txt out_lib.txt
+
+gcc file_creator_sys.c -o file_creator_sys
+./file_creator_sys
+cat output.txt
+cp output.txt out_sys.txt
+
+# Check that both versions produce the same file
+diff out_lib.txt out_sys.txt && echo "OUTPUTS IDENTICAL"
+
+# Part B - file reader
+gcc file_reader_lib.c -o file_reader_lib
+./file_reader_lib
+
+gcc file_reader_sys.c -o file_reader_sys
+./file_reader_sys

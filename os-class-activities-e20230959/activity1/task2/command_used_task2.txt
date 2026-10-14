@@ -1,0 +1,14 @@
+Commands used for Task 2 (Directory Listing and File Info)
+Server: i4gic-os, user gic-pum-brusmuny
+
+gcc dir_list_lib.c -o dir_list_lib
+./dir_list_lib
+
+gcc dir_list_sys.c -o dir_list_sys
+./dir_list_sys
+
+# Compare the two listings. readdir() order is not guaranteed, so sort both,
+# and write the results outside the folder so the result files do not list themselves.
+./dir_list_lib | sort > /tmp/lib.txt
+./dir_list_sys | sort > /tmp/sys.txt
+diff /tmp/lib.txt /tmp/sys.txt && echo "OUTPUTS IDENTICAL"

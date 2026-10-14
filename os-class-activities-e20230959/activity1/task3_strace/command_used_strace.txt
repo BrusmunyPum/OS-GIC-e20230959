@@ -1,0 +1,19 @@
+Commands used for Task 3 (strace analysis)
+Server: i4gic-os, user gic-pum-brusmuny
+Programs were compiled from ../task1 (file_creator_*, file_reader_*) and copied here.
+
+# Full traces of the file creator (all system calls, including startup)
+strace -o lib_trace.txt ./file_creator_lib
+strace -o sys_trace.txt ./file_creator_sys
+
+# Filtered traces used for the screenshots
+strace -e trace=openat,read,write,close ./file_creator_lib 2> strace_lib_task1.txt
+strace -e trace=openat,read,write,close ./file_creator_sys 2> strace_sys_task1.txt
+strace -e trace=openat,read,write,close ./file_reader_lib  2> strace_lib_reader.txt
+strace -e trace=openat,read,write,close ./file_reader_sys  2> strace_sys_reader.txt
+
+# Summaries (system call counts)
+strace -c ./file_creator_lib 2> strace_summary_lib.txt
+strace -c ./file_creator_sys 2> strace_summary_sys.txt
+strace -c -o lib_count.txt ./file_creator_lib
+strace -c -o sys_count.txt ./file_creator_sys
