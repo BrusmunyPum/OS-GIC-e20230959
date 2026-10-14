@@ -15,7 +15,7 @@ Prints a message with `write(1, ...)` instead of `printf()`. Source: [hello_sysc
 ![hello_syscall](screenshots/hello_syscall.png)
 
 ### Windows: `hello_winapi.c`
-Prints a message with `GetStdHandle` and `WriteFile`. Compiled and run on my Windows PC.
+Prints a message with `GetStdHandle` and `WriteFile`. Compiled with MinGW `gcc` (MSYS2) and run on my Windows PC. Source: [hello_winapi.c](hello_winapi.c)
 
 ![hello_winapi](screenshots/hello_winapi.png)
 
