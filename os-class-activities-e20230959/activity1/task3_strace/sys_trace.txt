@@ -1,0 +1,36 @@
+execve("./file_creator_sys", ["./file_creator_sys"], 0x7fffb66eb860 /* 24 vars */) = 0
+brk(NULL)                               = 0x59ca5b917000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x72cb90c1a000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=24155, ...}) = 0
+mmap(NULL, 24155, PROT_READ, MAP_PRIVATE, 3, 0) = 0x72cb90c14000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0 \250\2\0\0\0\0\0"..., 832) = 832
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 840, 64) = 840
+fstat(3, {st_mode=S_IFREG|0755, st_size=2190608, ...}) = 0
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 840, 64) = 840
+mmap(NULL, 2231696, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x72cb90800000
+mmap(0x72cb90828000, 1671168, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x72cb90828000
+mmap(0x72cb909c0000, 319488, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1c0000) = 0x72cb909c0000
+mmap(0x72cb90a0e000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x20e000) = 0x72cb90a0e000
+mmap(0x72cb90a14000, 52624, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x72cb90a14000
+close(3)                                = 0
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x72cb90c11000
+arch_prctl(ARCH_SET_FS, 0x72cb90c11740) = 0
+set_tid_address(0x72cb90c11d68)         = 253218
+set_robust_list(0x72cb90c11a20, 24)     = 0
+rseq(0x72cb90c11680, 0x21, 0, 0x53053053) = 0
+mprotect(0x72cb90a0e000, 16384, PROT_READ) = 0
+mprotect(0x59ca5b7d3000, 4096, PROT_READ) = 0
+mprotect(0x72cb90c5f000, 8192, PROT_READ) = 0
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+getrandom("\x1b\x1c\x82\xd1\xc0\xcb\x57\xb9", 8, GRND_NONBLOCK) = 8
+munmap(0x72cb90c14000, 24155)           = 0
+openat(AT_FDCWD, "output.txt", O_WRONLY|O_CREAT|O_TRUNC, 0644) = 3
+write(3, "Hello from the C library!\n", 26) = 26
+close(3)                                = 0
+write(1, "File created successfully.\n", 27) = 27
+exit_group(0)                           = ?
++++ exited with 0 +++
