@@ -1,0 +1,17 @@
+  739  cd ..
+  740  cd task4_mq/
+  741  ls
+  742  nano common.h
+  743  nano sender.c
+  744  nano receiver.c
+  745  gcc -o sender sender.c -lrt
+  746  gcc -o receiver receiver.c -lrt
+  747  ./sender
+  748  ./receiver > result-mq-ipc.txt
+  749  cat result-mq-ipc.txt
+  750  gcc -o sender sender.c -lrt
+  751  gcc -o receiver receiver.c -lrt
+  752  ./sender
+  753  ./receiver > result-mq-ipc.txt
+  754  cat result-mq-ipc.txt
+  755  history | tail -n 20 > command_used_mq.txt
