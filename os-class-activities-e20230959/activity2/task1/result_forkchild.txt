@@ -1,0 +1,14 @@
+Parent process (PID: 1023198) — creating child...
+Child process (PID: 1023199, Parent PID: 1023198)
+Child: sleeping 30s — observe the process tree now!
+total 40
+drwxrwxr-x 2 gic-pum-brusmuny gic-pum-brusmuny  4096 Oct 27 21:50 .
+drwxrwxr-x 7 gic-pum-brusmuny gic-pum-brusmuny  4096 Oct 21 10:03 ..
+-rw-rw-r-- 1 gic-pum-brusmuny gic-pum-brusmuny     0 Oct 21 10:03 .gitkeep
+-rw-rw-r-- 1 gic-pum-brusmuny gic-pum-brusmuny   842 Oct 27 21:48 command_used_forkchild.txt
+-rwxrwxr-x 1 gic-pum-brusmuny gic-pum-brusmuny 16480 Oct 27 21:50 forkchild
+-rw-rw-r-- 1 gic-pum-brusmuny gic-pum-brusmuny  1475 Oct 27 21:41 forkchild.c
+-rw-rw-r-- 1 gic-pum-brusmuny gic-pum-brusmuny   156 Oct 27 21:50 result_forkchild.txt
+Parent: waiting for child (PID: 1023199) to finish...
+Parent: child exited with status 0
+Parent: done.

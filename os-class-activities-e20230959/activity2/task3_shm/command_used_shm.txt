@@ -1,0 +1,20 @@
+  719  cd task3_shm
+  720  ls
+  721  cd ..
+  722  ls
+  723  cd task3_shm/
+  724  ls
+  725  nano shm-producer.c
+  726  nano shm-consumer.c
+  727  gcc -o shm-producer shm-producer.c -lrt
+  728  gcc -o shm-consumer shm-consumer.c -lrt
+  729  ./shm-producer
+  730  ./shm-consumer > result-shm-ipc.txt
+  731  cat result-shm-ipc.txt
+  732  history | tail -n 20 > command_used_shm.txt
+  733  gcc -o shm-producer shm-producer.c -lrt
+  734  gcc -o shm-consumer shm-consumer.c -lrt
+  735  ./shm-producer
+  736  ./shm-consumer > result-shm-ipc.txt
+  737  cat result-shm-ipc.txt
+  738  history | tail -n 20 > command_used_shm.txt

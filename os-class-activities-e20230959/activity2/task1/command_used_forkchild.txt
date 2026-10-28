@@ -1,0 +1,20 @@
+  676  cat "$OSLAB_WORKSPACE/lab2/evidence/checkpoint.txt"
+  677  oslab check lab2
+  678  ls
+  679  cd os-gic-e20230959/
+  680  ls
+  681  tree
+  682  cd activity2
+  683  ls
+  684  cd os-class-activities-e20230959/
+  685  ls
+  686  cd activity2
+  687  tree
+  688  cd ~/os-gic-e20230959/os-class-activities-e20230959/activity2/task1
+  689  nano forkchild.c
+  690  gcc -o forkchild forkchild.c
+  691  cat forkchild.c
+  692  cd ~/os-gic-e20230959/os-class-activities-e20230959/activity2/task1 && sed -i '/creating child/a\    fflush(stdout);' forkchild.c && sed -i '/observe the process tree now/a\        fflush(stdout);' forkchild.c
+  693  grep -n -B1 fflush forkchild.c
+  694  clear && gcc -o forkchild forkchild.c && ./forkchild > result_forkchild.txt 2>&1
+  695  cat result_forkchild.txt && history | tail -n 20 > command_used_forkchild.txt
