@@ -1,0 +1,9 @@
+mv "tax summary.txt" ../reports/
+mv "/home/gic-pum-brusmuny/oslab-work/lab2/incoming/travel claims.txt" "/home/gic-pum-brusmuny/oslab-work/lab2/reports/"
+cp "reports/tax summary.txt" "reports/travel claims.txt" "TechCorp/Audit/"
+cp "reports/tax summary.txt" "TechCorp/Audit/archive/first-original.txt"
+cat "../Audit/tax summary.txt"
+cat "/home/gic-pum-brusmuny/oslab-work/lab2/TechCorp/Audit/tax summary.txt"
+Step 3 used relative paths because I was already in the lab folder and the destination was close. Absolute paths are better when running from a different directory or in scripts.
+Error: cat: 'reports/tax summary.txt': No such file or directory
+Fix: ../../reports/tax summary.txt
