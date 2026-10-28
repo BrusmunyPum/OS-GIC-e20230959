@@ -1,0 +1,8 @@
+Move command from mess/c:
+mv "../a/b/lost file.txt" found.txt
+
+Copy command from mess/a/b:
+cp ../../c/found.txt ../../../TechCorp/Support/
+
+Count of ..:
+2 to reach found.txt (../../c/found.txt) and 3 to reach TechCorp/Support (../../../TechCorp/Support/)

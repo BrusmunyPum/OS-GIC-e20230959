@@ -1,0 +1,8 @@
+Command used:
+cp reports/*.txt TechCorp/Support/
+
+1. Why does the command fail if you put quotes around *.txt?
+Quoting '*.txt' prevents wildcard expansion (globbing) by the shell. Instead of matching all text files, cp looks for a literal file named '*.txt', giving "No such file or directory".
+
+2. Create reports/.hidden.txt. Does your command copy it? Why?
+No. Files beginning with a dot (.) are hidden files in Linux. Shell globbing with * ignores hidden files by default unless explicitly matched (e.g., .*).
