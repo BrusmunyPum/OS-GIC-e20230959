@@ -1,0 +1,26 @@
+
+=== BEFORE RENAME ===
+19141756 -rw-rw-r-- 2 gic-pum-brusmuny gic-pum-brusmuny 12 Nov 11 23:39 ocean-hard.txt
+19141909 lrwxrwxrwx 1 gic-pum-brusmuny gic-pum-brusmuny  9 Nov 12 00:02 ocean-soft.txt -> ocean.txt
+19141756 -rw-rw-r-- 2 gic-pum-brusmuny gic-pum-brusmuny 12 Nov 11 23:39 ocean.txt
+hard: version 257
+soft: version 257
+stored target: ocean.txt
+
+=== AFTER RENAME, BEFORE REPAIR ===
+19141756 -rw-rw-r-- 2 gic-pum-brusmuny gic-pum-brusmuny 12 Nov 11 23:39 ocean-backup.txt
+19141756 -rw-rw-r-- 2 gic-pum-brusmuny gic-pum-brusmuny 12 Nov 11 23:39 ocean-hard.txt
+19141909 lrwxrwxrwx 1 gic-pum-brusmuny gic-pum-brusmuny  9 Nov 12 00:02 ocean-soft.txt -> ocean.txt
+hard: version 257
+stored target: ocean.txt
+soft: cat: ocean-soft.txt: No such file or directory
+
+=== AFTER REPAIR ===
+19141756 -rw-rw-r-- 2 gic-pum-brusmuny gic-pum-brusmuny 12 Nov 11 23:39 ocean-backup.txt
+19141756 -rw-rw-r-- 2 gic-pum-brusmuny gic-pum-brusmuny 12 Nov 11 23:39 ocean-hard.txt
+19141909 lrwxrwxrwx 1 gic-pum-brusmuny gic-pum-brusmuny 16 Nov 12 00:03 ocean-soft.txt -> ocean-backup.txt
+stored target: ocean-backup.txt
+hard: version 257
+soft: version 257
+
+Decision: I stored the relative target ocean-backup.txt because the symlink and target share the links/ folder, whereas an absolute path would break if the whole folder were moved or renamed.

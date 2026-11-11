@@ -1,0 +1,9 @@
+
+=== NEW FILE USING THE OLD NAME ===
+19141756 -rw-rw-r-- 2 gic-pum-brusmuny gic-pum-brusmuny 12 Nov 11 23:39 ocean-backup.txt
+19141756 -rw-rw-r-- 2 gic-pum-brusmuny gic-pum-brusmuny 12 Nov 11 23:39 ocean-hard.txt
+19141909 lrwxrwxrwx 1 gic-pum-brusmuny gic-pum-brusmuny  9 Nov 12 00:02 ocean-soft.txt -> ocean.txt
+19141911 -rw-rw-r-- 1 gic-pum-brusmuny gic-pum-brusmuny 12 Nov 12 00:03 ocean.txt
+ocean.txt: version 346
+hard: version 257
+soft: version 346

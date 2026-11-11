@@ -1,0 +1,6 @@
+<notes/ocean12.txt>
+<notes/ocean1.txt>
+<notes/ocean2.txt>
+<notes/ocean1.txt>
+<notes/ocean2.txt>
+<notes/*.txt>

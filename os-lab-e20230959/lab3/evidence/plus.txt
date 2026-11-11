@@ -1,0 +1,1 @@
+I expected notes/ocean[!1]* to match only ocean2.txt, but it also matched ocean.log because '.' is not '1' and '*' matched 'log' (while ocean12.txt was skipped because its first character after 'ocean' is '1').

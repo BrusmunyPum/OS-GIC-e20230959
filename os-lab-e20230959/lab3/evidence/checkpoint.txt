@@ -1,0 +1,12 @@
+.:
+total 8
+19141924 -rw-rw-r-- 2 gic-pum-brusmuny gic-pum-brusmuny   24 Nov 12 00:15 forest-draft.txt
+19141923 drwxrwxr-x 2 gic-pum-brusmuny gic-pum-brusmuny 4096 Nov 12 00:17 links
+
+links:
+total 4
+19141925 lrwxrwxrwx 1 gic-pum-brusmuny gic-pum-brusmuny 19 Nov 12 00:17 first.txt -> ../forest-draft.txt
+19141924 -rw-rw-r-- 2 gic-pum-brusmuny gic-pum-brusmuny 24 Nov 12 00:15 hard.txt
+19141926 lrwxrwxrwx 1 gic-pum-brusmuny gic-pum-brusmuny  9 Nov 12 00:15 second.txt -> first.txt
+checkpoint lemon forest
+checkpoint lemon forest
