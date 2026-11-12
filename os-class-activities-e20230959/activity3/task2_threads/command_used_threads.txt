@@ -1,0 +1,20 @@
+    printf("\nAll threads completed.\n");
+    printf("Expected counter value: %d\n", NUM_THREADS * 100000);
+    printf("Actual counter value:   %d\n", shared_counter);
+
+    if (shared_counter == NUM_THREADS * 100000) {
+        printf("OK: Counter is correct! Mutex prevented the race condition.\n");
+    }
+
+    pthread_mutex_destroy(&counter_mutex);
+    return 0;
+}
+EOF
+
+ 1171  gcc -o threads threads.c -pthread
+ 1172  ./threads > result_threads.txt 2>&1
+ 1173  cat result_threads.txt
+ 1174  gcc -o threads_mutex threads_mutex.c -pthread
+ 1175  ./threads_mutex > result_threads_mutex.txt 2>&1
+ 1176  cat result_threads_mutex.txt
+ 1177  history | tail -n 20 > command_used_threads.txt

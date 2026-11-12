@@ -1,0 +1,20 @@
+ 1144  printf 'one more line\n' | tee -a evidence/tee-demo.txt
+ 1145  cat evidence/tee-demo.txt
+ 1146  cat data/events.csv data/not-present.csv > evidence/both.txt 2>&1
+ 1147  cat evidence/both.txt
+ 1148  cat data/not-present.csv > evidence/demo-out.txt 2> evidence/demo-error.txt
+ 1149  echo $?
+ 1150  cat evidence/demo-out.txt
+ 1151  cat evidence/demo-error.txt
+ 1152  oslab predict lab4
+ 1153  exit
+ 1154  tree
+ 1155  ./server 
+ 1156  cd ~/os-gic-e20230959/os-class-activities-e20230959/activity3/task1_socket
+ 1157  ./server > result_server.txt 2>&1 &
+ 1158  sleep 1
+ 1159  ./client > result_client.txt 2>&1
+ 1160  wait
+ 1161  cat result_server.txt result_client.txt > result_socket.txt
+ 1162  rm result_server.txt result_client.txt
+ 1163  history | tail -n 20 > command_used_socket.txt
