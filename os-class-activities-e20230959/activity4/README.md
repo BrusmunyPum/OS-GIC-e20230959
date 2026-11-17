@@ -2,10 +2,10 @@
 
 - **Student Name:** PUM BRUSMUNY
 - **Student ID:** e20230959
-- **Partner Name:** [TODO: Partner Name]
-- **Partner Student ID:** [TODO: Partner ID]
-- **Server Machine Owner:** [TODO: Your Name or Partner Name]
-- **Server IP Address:** [TODO: e.g. 192.168.1.25]
+- **Partner Name:** N/A (Completed solo with separate client terminals for Student A and Student B)
+- **Partner Student ID:** N/A
+- **Server Machine Owner:** PUM BRUSMUNY (`i4gic-os` for Tasks 1–2 C++, `DESKTOP-28AVG3P` for Tasks 3–4 Java)
+- **Server IP Address:** `192.168.71.175` (C++ on `i4gic-os`) / `127.0.0.1` (Java local loopback on Windows)
 
 ---
 
@@ -14,8 +14,8 @@
 ![C++ before mutex](screenshots/cpp_before_mutex.png)
 
 - **Expected score after 20 total client requests:** 20
-- **Actual score:** [TODO: observed value from `shared_score.txt`]
-- **What happened:** [TODO: Describe the race condition observed — e.g., multiple detached threads read the same score before sleeping 200ms and overwrote each other's updates]
+- **Actual score:** 2
+- **What happened:** All 10 `A_*` requests arrived concurrently, read `0` from `shared_score.txt` at the same time before the 200 ms sleep, and all wrote `1`. Next, all 10 `B_*` requests arrived, read `1` concurrently, and all wrote `2`. Because `update_score()` had no mutex, 18 increments were lost due to race conditions and `cat shared_score.txt` ended at `2`.
 
 ---
 
@@ -24,8 +24,8 @@
 ![C++ after mutex](screenshots/cpp_after_mutex.png)
 
 - **Expected score after 20 total client requests:** 20
-- **Actual score:** [TODO: observed value from `shared_score.txt`, should be 20]
-- **What changed after adding mutex:** [TODO: Describe what changed — `std::lock_guard<std::mutex>` serialized access to `update_score()` so every increment was preserved]
+- **Actual score:** 20
+- **What changed after adding mutex:** Adding `std::lock_guard<std::mutex> lock(file_mutex);` at the start of `update_score()` forced every detached client thread to wait its turn to read, increment, and write `shared_score.txt`. Requests `A_1`–`A_10` incremented the score sequentially from `1` to `10`, and `B_1`–`B_10` continued cleanly from `11` to `20`, giving the exact expected final value `20`.
 
 ---
 
@@ -34,8 +34,8 @@
 ![Java before synchronized](screenshots/java_before_synchronized.png)
 
 - **Expected score after 20 total client requests:** 20
-- **Actual score:** [TODO: observed value from `shared_score.txt`]
-- **What happened:** [TODO: Describe the race condition observed across concurrent Java handler threads]
+- **Actual score:** 3
+- **What happened:** Without `synchronized`, multiple Java client-handler threads entered `updateScore()` at the same time. All 10 `A_*` threads read `0` and wrote `1`, then `B_1`–`B_7` read `1` and wrote `2`, and `B_8`–`B_10` read `2` and wrote `3`. Seventeen updates were lost and `cat shared_score.txt` ended at `3`.
 
 ---
 
@@ -44,8 +44,8 @@
 ![Java after synchronized](screenshots/java_after_synchronized.png)
 
 - **Expected score after 20 total client requests:** 20
-- **Actual score:** [TODO: observed value from `shared_score.txt`, should be 20]
-- **What changed after adding synchronized:** [TODO: Describe what changed — adding `synchronized` to `updateScore()` ensured mutual exclusion so the final score reliably reached 20]
+- **Actual score:** 20
+- **What changed after adding synchronized:** Adding the `synchronized` modifier to `private static synchronized int updateScore(String name)` caused the JVM to serialize calls using `ScoreServerSync.class`'s monitor lock. Only one thread could read, sleep, increment, and write `shared_score.txt` at a time, so the score progressed cleanly from `1` to `20` across all 20 requests (`cat shared_score.txt` = `20`).
 
 ---
 
@@ -73,4 +73,10 @@
 
 ## Reflection
 
-_TODO: Compare your observed C++ (`std::mutex` + `std::lock_guard`) and Java (`synchronized`) results and reflect on what this activity taught you about protecting shared resources._
+> This activity demonstrated a critical lesson in concurrent system design: **putting a single server API in front of a shared file eliminates multi-client direct file access, but does not eliminate race conditions if the server handles requests concurrently across threads.** Without synchronization, both the C++ (`2/20`) and Java (`3/20`) servers suffered severe lost updates during the 200 ms read-modify-write window.
+>
+> Comparing the two fixes highlighted how both languages achieve the same mutual exclusion with different idioms:
+> - **C++ (`std::mutex` + `std::lock_guard`):** Uses an explicit mutex variable (`file_mutex`) paired with RAII (`lock_guard`), guaranteeing the lock is unlocked when the scope exits even if an early return or exception occurs.
+> - **Java (`synchronized`):** Built directly into the language via intrinsic monitor locks on `ScoreServerSync.class` for static methods, making critical-section protection very concise while still guaranteeing only one thread updates `shared_score.txt` at a time.
+>
+> Overall, protecting a shared resource requires synchronizing the **entire** read-modify-write critical section inside the server—and if multiple server processes ever share the same storage, synchronization must move to OS file locks or an atomic database/transaction layer.
