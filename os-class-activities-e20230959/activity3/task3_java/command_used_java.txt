@@ -1,30 +1,30 @@
-
-    printf("\nAll threads completed.\n");
-    printf("Expected counter value: %d\n", NUM_THREADS * 100000);
-    printf("Actual counter value:   %d\n", shared_counter);
-
-    if (shared_counter == NUM_THREADS * 100000) {
-        printf("OK: Counter is correct! Mutex prevented the race condition.\n");
+                e.printStackTrace();
+            }
+            System.out.printf("Task %d completed on thread %s%n",
+                taskId, Thread.currentThread().getName());
+        }
     }
 
-    pthread_mutex_destroy(&counter_mutex);
-    return 0;
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println("Main: creating thread pool with 2 threads for 6 tasks\n");
+
+        ExecutorService pool = Executors.newFixedThreadPool(2);
+
+        for (int i = 1; i <= 6; i++) {
+            pool.submit(new Task(i));
+        }
+
+        pool.shutdown();
+        pool.awaitTermination(30, TimeUnit.SECONDS);
+
+        System.out.println("\nMain: all tasks completed. Pool shut down.");
+    }
 }
 EOF
 
- 1171  gcc -o threads threads.c -pthread
- 1172  ./threads > result_threads.txt 2>&1
- 1173  cat result_threads.txt
- 1174  gcc -o threads_mutex threads_mutex.c -pthread
- 1175  ./threads_mutex > result_threads_mutex.txt 2>&1
- 1176  cat result_threads_mutex.txt
- 1177  history | tail -n 20 > command_used_threads.txt
- 1178  cd ~/os-gic-e20230959/os-class-activities-e20230959/activity3/task3_java
- 1179  javac ThreadDemo.java RunnableDemo.java PoolDemo.java
- 1180  java ThreadDemo > result_thread_demo.txt 2>&1
- 1181  java RunnableDemo > result_runnable_demo.txt 2>&1
- 1182  java PoolDemo > result_pool_demo.txt 2>&1
- 1183  cat result_thread_demo.txt
- 1184  cat result_runnable_demo.txt
- 1185  cat result_pool_demo.txt
- 1186  history | tail -n 30 > command_used_java.txt
+   46  javac ThreadDemo.java RunnableDemo.java PoolDemo.java
+   47  java ThreadDemo > result_thread_demo.txt 2>&1
+   48  java RunnableDemo > result_runnable_demo.txt 2>&1
+   49  java PoolDemo > result_pool_demo.txt 2>&1
+   50  cat result_thread_demo.txt result_runnable_demo.txt result_pool_demo.txt
+   51  history | tail -n 30 > command_used_java.txt
